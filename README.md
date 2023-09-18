@@ -95,34 +95,28 @@ The database works with a limited SQL syntax detailed below.
     <name> denotes a rule which may contain arbitrary additional whitespace within the token, where as [name] indicates a rule that cannot contain additional whitespace    
 
 ## Transcript Example:
-    CREATE DATABASE markbook;
-    server response: [OK] Database created successfully.
+    SQL:> CREATE DATABASE markbook;
+    [OK] Database created successfully.
 
-    USE markbook;
+    SQL:> USE markbook;
     [OK] Switched to database: markbook
 
-    CREATE TABLE marks (name, mark, pass);
-    
+    SQL:> CREATE TABLE marks (name, mark, pass);
     [OK] Table created successfully.
     
-    INSERT INTO marks VALUES ('Steve', 65, TRUE);
-    
+    SQL:> INSERT INTO marks VALUES ('Steve', 65, TRUE);
     [OK] Data inserted successfully.
     
-    INSERT INTO marks VALUES ('Dave', 55, TRUE);
-    
+    SQL:> INSERT INTO marks VALUES ('Dave', 55, TRUE);
     [OK] Data inserted successfully.
     
-    INSERT INTO marks VALUES ('Bob', 35, FALSE);
-    
+    SQL:> INSERT INTO marks VALUES ('Bob', 35, FALSE);
     [OK] Data inserted successfully.
     
-    INSERT INTO marks VALUES ('Clive', 20, FALSE);
-    
+    SQL:> INSERT INTO marks VALUES ('Clive', 20, FALSE);
     [OK] Data inserted successfully.
     
-    SELECT * FROM marks;
-    
+    SQL:> SELECT * FROM marks;
     [OK]
     id	name 	mark	pass 
     1 	Steve	65  	TRUE 
@@ -130,39 +124,39 @@ The database works with a limited SQL syntax detailed below.
     3 	Bob  	35  	FALSE
     4 	Clive	20  	FALSE
     
-    SELECT * FROM marks WHERE name != 'Dave';
+    SQL:> SELECT * FROM marks WHERE name != 'Dave';
     [OK]
     id	name 	mark	pass 
     1 	Steve	65  	TRUE 
     3 	Bob  	35  	FALSE
     4 	Clive	20  	FALSE
 
-    SELECT * FROM marks WHERE pass == TRUE;
+    SQL:> SELECT * FROM marks WHERE pass == TRUE;
     [OK]
     id	name 	mark	pass
     1 	Steve	65  	TRUE
     2 	Dave 	55  	TRUE
 
-    UPDATE marks SET mark = 38 WHERE name == 'Clive';
+    SQL:> UPDATE marks SET mark = 38 WHERE name == 'Clive';
     [OK] Table updated successfully.
 
-    SELECT * FROM marks WHERE name LIKE 've';
+    SQL:> SELECT * FROM marks WHERE name LIKE 've';
     [OK]
     id	name 	mark	pass 
     1 	Steve	65  	TRUE 
     2 	Dave 	55  	TRUE 
     4 	Clive	38  	FALSE
 
-    SELECT id FROM marks WHERE pass == FALSE;
+    SQL:> SELECT id FROM marks WHERE pass == FALSE;
     [OK]
     id
     3 
     4 
 
-    DELETE FROM marks WHERE mark<40;
+    SQL:> DELETE FROM marks WHERE mark<40;
     [OK] Rows deleted successfully.
 
-    SELECT * FROM marks;
+    SQL:> SELECT * FROM marks;
     [OK]
     id	name	mark	pass
     1	Steve	65	TRUE
