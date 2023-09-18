@@ -26,9 +26,6 @@ public class DBServer {
         server.blockingListenOn(8888);
     }
 
-    /**
-    * KEEP this signature otherwise we won't be able to mark your submission correctly.
-    */
     public DBServer() {
         storageFolderPath = Paths.get("databases").toAbsolutePath().toString();
         try {
@@ -39,12 +36,6 @@ public class DBServer {
         }
     }
 
-    /**
-    * KEEP this signature (i.e. {@code edu.uob.DBServer.handleCommand(String)}) otherwise we won't be
-    * able to mark your submission correctly.
-    *
-    * <p>This method handles all incoming DB commands and carries out the required actions.
-    */
 
     public String handleCommand(String command) {
         command = command.trim();
@@ -277,8 +268,6 @@ public class DBServer {
         return "[ERROR] Unknown command.";
     }
 
-
-    //  === Methods below handle networking aspects of the project - you will not need to change these ! ===
 
     public void blockingListenOn(int portNumber) throws IOException {
         try (ServerSocket s = new ServerSocket(portNumber)) {
