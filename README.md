@@ -3,9 +3,33 @@ This project folder contains a fully working relational database built from scra
 
 ## How to use:
 This project consists of a server and a client, both of which must be run in order to run the server and have the user connect to it. Both of these can be run from the command line.
-### Connect to the server from the command line
+### Connect to the server from the command line:
     mvnw exec:java@server
-### Connect to the client from the command line
+### Connect to the client from the command line:
     mvnw exec:java@client
   The server has persistent storage as created databases are automatically stored on the users file system in a folder called 'Databases'
 
+## Query Examples:
+    CREATE DATABASE markbook;
+    server response: [OK] Database created successfully.
+
+    USE markbook;
+    server response: [OK] Switched to database: markbook
+
+    CREATE TABLE marks (name, mark, pass);
+    server response: [OK] Table created successfully.
+    SQL:> INSERT INTO marks VALUES ('Steve', 65, TRUE);
+    server response: [OK] Data inserted successfully.
+    SQL:> INSERT INTO marks VALUES ('Dave', 55, TRUE);
+    [OK] Data inserted successfully.
+    INSERT INTO marks VALUES ('Bob', 35, FALSE);
+    server response: [OK] Data inserted successfully.
+    INSERT INTO marks VALUES ('Clive', 20, FALSE);
+    server response: [OK] Data inserted successfully.
+    SELECT * FROM marks;
+    server response: [OK]
+    id	name 	mark	pass 
+    1 	Steve	65  	TRUE 
+    2 	Dave 	55  	TRUE 
+    3 	Bob  	35  	FALSE
+    4 	Clive	20  	FALSE
