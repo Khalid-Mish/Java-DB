@@ -166,3 +166,6 @@ The database works with a limited SQL syntax detailed below.
     [OK]
     id	name	mark	pass
     1	Steve	65	TRUE
+
+## Disclaimer
+Please note, this work belongs to me and may not be used by students without my permission.
