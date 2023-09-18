@@ -44,3 +44,40 @@ This project consists of a server and a client, both of which must be run in ord
     2 	Dave 	55  	TRUE 
     3 	Bob  	35  	FALSE
     4 	Clive	20  	FALSE
+    
+    SELECT * FROM marks WHERE name != 'Dave';
+    [OK]
+    id	name 	mark	pass 
+    1 	Steve	65  	TRUE 
+    3 	Bob  	35  	FALSE
+    4 	Clive	20  	FALSE
+
+    SELECT * FROM marks WHERE pass == TRUE;
+    [OK]
+    id	name 	mark	pass
+    1 	Steve	65  	TRUE
+    2 	Dave 	55  	TRUE
+
+    UPDATE marks SET mark = 38 WHERE name == 'Clive';
+    [OK] Table updated successfully.
+
+    SELECT * FROM marks WHERE name LIKE 've';
+    [OK]
+    id	name 	mark	pass 
+    1 	Steve	65  	TRUE 
+    2 	Dave 	55  	TRUE 
+    4 	Clive	38  	FALSE
+
+    SELECT id FROM marks WHERE pass == FALSE;
+    [OK]
+    id
+    3 
+    4 
+
+    DELETE FROM marks WHERE mark<40;
+    [OK] Rows deleted successfully.
+
+    SELECT * FROM marks;
+    [OK]
+    id	name	mark	pass
+    1	Steve	65	TRUE
