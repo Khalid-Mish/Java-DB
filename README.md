@@ -2,7 +2,7 @@
 This project folder contains a fully working relational database built from scratch in Java.
 
 ## How to use:
-This project consists of a server and a client, both of which must be run in order to run the server and have the user connect to it. Both of these can be run from the command line.
+This project consists of a server and a client, both of which must be run in order to start the server and have the user connect to it. Both of these can be run from the command line.
 ### Connect to the server from the command line:
     mvnw exec:java@server
 ### Connect to the client from the command line:
