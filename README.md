@@ -95,71 +95,153 @@ The database works with a limited SQL syntax detailed below.
     <name> denotes a rule which may contain arbitrary additional whitespace within the token, where as [name] indicates a rule that cannot contain additional whitespace    
 
 ## Transcript Example:
-    SQL:> CREATE DATABASE markbook;
-    [OK] Database created successfully.
-
-    SQL:> USE markbook;
-    [OK] Switched to database: markbook
-
-    SQL:> CREATE TABLE marks (name, mark, pass);
-    [OK] Table created successfully.
-    
-    SQL:> INSERT INTO marks VALUES ('Steve', 65, TRUE);
-    [OK] Data inserted successfully.
-    
-    SQL:> INSERT INTO marks VALUES ('Dave', 55, TRUE);
-    [OK] Data inserted successfully.
-    
-    SQL:> INSERT INTO marks VALUES ('Bob', 35, FALSE);
-    [OK] Data inserted successfully.
-    
-    SQL:> INSERT INTO marks VALUES ('Clive', 20, FALSE);
-    [OK] Data inserted successfully.
-    
-    SQL:> SELECT * FROM marks;
+    CREATE DATABASE markbook;
     [OK]
-    id	name 	mark	pass 
-    1 	Steve	65  	TRUE 
-    2 	Dave 	55  	TRUE 
-    3 	Bob  	35  	FALSE
-    4 	Clive	20  	FALSE
-    
-    SQL:> SELECT * FROM marks WHERE name != 'Dave';
+
+    USE markbook;
     [OK]
-    id	name 	mark	pass 
-    1 	Steve	65  	TRUE 
-    3 	Bob  	35  	FALSE
-    4 	Clive	20  	FALSE
 
-    SQL:> SELECT * FROM marks WHERE pass == TRUE;
+    CREATE TABLE marks (name, mark, pass);
     [OK]
-    id	name 	mark	pass
-    1 	Steve	65  	TRUE
-    2 	Dave 	55  	TRUE
 
-    SQL:> UPDATE marks SET mark = 38 WHERE name == 'Clive';
-    [OK] Table updated successfully.
-
-    SQL:> SELECT * FROM marks WHERE name LIKE 've';
+    INSERT INTO marks VALUES ('Simon', 65, TRUE);
     [OK]
-    id	name 	mark	pass 
-    1 	Steve	65  	TRUE 
-    2 	Dave 	55  	TRUE 
-    4 	Clive	38  	FALSE
 
-    SQL:> SELECT id FROM marks WHERE pass == FALSE;
+    INSERT INTO marks VALUES ('Sion', 55, TRUE);
     [OK]
-    id
-    3 
-    4 
 
-    SQL:> DELETE FROM marks WHERE mark<40;
-    [OK] Rows deleted successfully.
+    INSERT INTO marks VALUES ('Rob', 35, FALSE);
+    [OK]
 
-    SQL:> SELECT * FROM marks;
+    INSERT INTO marks VALUES ('Chris', 20, FALSE);
+    [OK]
+
+    SELECT * FROM marks;
     [OK]
     id	name	mark	pass
-    1	Steve	65	TRUE
+    1	Simon	65	TRUE
+    2	Sion	55	TRUE
+    3	Rob	35	FALSE
+    4	Chris	20	FALSE
+
+    SELECT * FROM marks WHERE name != 'Sion';
+    [OK]
+    id	name	mark	pass
+    1	Simon	65	TRUE
+    3	Rob	35	FALSE
+    4	Chris	20	FALSE
+
+    SELECT * FROM marks WHERE pass == TRUE;
+    [OK]
+    id	name	mark	pass
+    1	Simon	65	TRUE
+    2	Sion	55	TRUE
+
+
+    SELECT * FROM coursework;
+    [OK]
+    id	task	submission
+    1	OXO	3
+    2	DB	1
+    3	OXO	4
+    4	STAG	2
+
+    JOIN coursework AND marks ON submission AND id;
+    [OK]
+    id	coursework.task	marks.name	marks.mark	marks.pass
+    1	OXO			Rob		35		FALSE
+    2	DB			Simon		65		TRUE
+    3	OXO			Chris		20		FALSE
+    4	STAG			Sion		55		TRUE
+
+    UPDATE marks SET mark = 38 WHERE name == 'Chris';
+    [OK]
+
+    SELECT * FROM marks WHERE name == 'Chris';
+    [OK]
+    id	name	mark	pass
+    4	Chris	38	FALSE
+
+    DELETE FROM marks WHERE name == 'Sion';
+    [OK]
+
+    SELECT * FROM marks;
+    [OK]
+    id	name	mark	pass
+    1	Simon	65	TRUE
+    3	Rob	35	FALSE
+    4	Chris	38	FALSE
+
+    SELECT * FROM marks WHERE (pass == FALSE) AND (mark > 35);
+    [OK]
+    id	name	mark	pass
+    4	Chris	38	FALSE
+
+    SELECT * FROM marks WHERE name LIKE 'i';
+    [OK]
+    id	name	mark	pass
+    1	Simon	65	TRUE
+    4	Chris	38	FALSE
+
+    SELECT id FROM marks WHERE pass == FALSE;
+    [OK]
+    id
+    3
+    4
+
+    SELECT name FROM marks WHERE mark>60;
+    [OK]
+    name
+    Simon
+
+
+    DELETE FROM marks WHERE mark<40;
+    [OK]
+
+    SELECT * FROM marks;
+    [OK]
+    id	name	mark	pass
+    1	Simon	65	TRUE
+
+    ALTER TABLE marks ADD age;
+    [OK]
+
+    SELECT * FROM marks;
+    [OK]
+    id	name	mark	pass	age
+    1	Simon	65	TRUE	
+
+    UPDATE marks SET age = 35 WHERE name == 'Simon';
+    [OK]
+
+    SELECT * FROM marks;
+    [OK]
+    id	name	mark	pass	age
+    1	Simon	65	TRUE	35
+
+    ALTER TABLE marks DROP pass;
+    [OK]
+
+    SELECT * FROM marks;
+    [OK]
+    id	name	mark	age
+    1	Simon	65	35
+
+    SELECT * FROM marks
+    [ERROR]: Semi colon missing at end of line
+
+    SELECT * FROM crew;
+    [ERROR]: Table does not exist
+
+    SELECT height FROM marks WHERE name == 'Chris';
+    [ERROR]: Attribute does not exist (or similar message !)
+
+    DROP TABLE marks;
+    [OK]
+
+    DROP DATABASE markbook;
+    [OK]
+
 
 ## Disclaimer
 Please note, this work belongs to me and may not be used by students without my permission.
